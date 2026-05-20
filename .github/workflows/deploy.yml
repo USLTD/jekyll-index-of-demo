@@ -3,8 +3,8 @@ name: Deploy Jekyll site to Pages
 on:
   push:
     branches: [ main ]
-  repository_dispatch:               # <-- Add this block to catch the ping
-    types: [ template_updated ]      # <-- Custom event label
+  repository_dispatch:               # Catches the ping sent from the template
+    types: [ template_updated ]
   workflow_dispatch:
 
 permissions:
@@ -20,23 +20,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 1. Pull the demonstration repository (your public/ mock folders)
       - name: Checkout demo content
         uses: actions/checkout@v4
         with:
           path: demo-repo
 
-      # 2. Pull the core template logic in real-time (always fetches the latest commit)
-      - name: Checkout core template logic
+      - name: Checkout core template logic (including freshly fetched icons)
         uses: actions/checkout@v4
         with:
           repository: USLTD/jekyll-index-of
           path: template-repo
 
-      # 3. Merge the template code into your demo environment workspace
       - name: Merge template structures with demo content
         run: |
-          # Copy core configuration, scripts, layouts, and icons into the workspace root
+          # Copy layout architecture components
           cp -r template-repo/_layouts/ ./
           cp -r template-repo/_includes/ ./
           cp -r template-repo/assets/ ./
@@ -44,7 +41,7 @@ jobs:
           cp template-repo/_config.yml ./
           cp template-repo/index.html ./
           
-          # Move your demonstration assets folder to the workspace root
+          # Move your demonstration mock assets folder into place
           cp -r demo-repo/public/ ./
 
       - name: Setup Node.js
@@ -58,7 +55,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # 6. Build the static distribution site
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
