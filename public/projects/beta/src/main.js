@@ -1,1 +1,1 @@
-print("Hello from beta sample")
+console.log("Hello from beta sample");
