@@ -40,8 +40,8 @@ jobs:
           cp template-repo/generate-directory-listings.js ./
           cp template-repo/_config.yml ./
           cp template-repo/index.html ./
+          cp template-repo/404.html ./
           
-          # Move your demonstration mock assets folder into place
           cp -r demo-repo/public/ ./
 
       - name: Setup Node.js
