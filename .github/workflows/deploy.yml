@@ -3,6 +3,8 @@ name: Deploy Jekyll site to Pages
 on:
   push:
     branches: [ main ]
+  repository_dispatch:               # <-- Add this block to catch the ping
+    types: [ template_updated ]      # <-- Custom event label
   workflow_dispatch:
 
 permissions:
