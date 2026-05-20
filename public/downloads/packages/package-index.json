@@ -1,0 +1,6 @@
+{
+  "packages": [
+    {"name": "demo-core", "version": "1.0.0"},
+    {"name": "demo-extra", "version": "1.0.0"}
+  ]
+}
